@@ -2,12 +2,9 @@ import { Menu } from "lucide-react";
 import {
    Sheet,
    SheetContent,
-   SheetDescription,
-   SheetHeader,
-   SheetTitle,
    SheetTrigger,
  } from "@/components/ui/sheet"
- 
+import { Sidebar } from "./Sidebar";
 
 export const MobileSidebar = () =>{
    return (
@@ -16,13 +13,7 @@ export const MobileSidebar = () =>{
             <Menu />
          </SheetTrigger>
          <SheetContent side={"left"} className="p-0 bg-white">
-            <SheetHeader>
-               <SheetTitle>Are you absolutely sure?</SheetTitle>
-               <SheetDescription>
-               This action cannot be undone. This will permanently delete your account
-               and remove your data from our servers.
-               </SheetDescription>
-            </SheetHeader>
+            <Sidebar/>
          </SheetContent>
       </Sheet>
    )
