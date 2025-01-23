@@ -14,7 +14,7 @@ const backgroundVariants = cva(
          size: {
             default: "p-2",
             sm: "p-1",
-         },
+         }
       },
       defaultVariants: {
          variant: "default",
@@ -24,12 +24,12 @@ const backgroundVariants = cva(
 );
 
 const iconVariants = cva(
-   "flex ",
+   "",
    {
       variants: {
          variant: {
             default: "text-sky-700",
-            success: "text-emerold-700"
+            success: "text-emerald-700",
          },
          size: {
             default: "h-8 w-8",
@@ -48,7 +48,7 @@ type IconVariantsProps = VariantProps<typeof iconVariants>;
 
 interface IconBadgeProps extends BackgroundVariantsProps, IconVariantsProps {
    icon: LucideIcon;
-}
+};
 
 export const IconBadge = ({
    icon: Icon,

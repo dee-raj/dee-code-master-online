@@ -1,25 +1,25 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { ImageIcon, Pencil, PlusCircle, X } from "lucide-react";
-import { Course } from "@prisma/client";
-import toast from "react-hot-toast";
-import { useState } from "react";
-import axios from "axios";
 import * as z from "zod";
+import axios from "axios";
+import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { Course } from "@prisma/client";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 
 interface ImageFormProps {
-   initialData: Course;
+   initialData: Course
    courseId: string;
-}
+};
 
 const formSchema = z.object({
    imageUrl: z.string().min(1, {
-      message: "Image is required!",
+      message: "Image is required",
    }),
 });
 
@@ -32,26 +32,24 @@ export const ImageForm = ({
 
    const router = useRouter();
 
-   const onSumbit = async (values: z.infer<typeof formSchema>) => {
+   const onSubmit = async (values: z.infer<typeof formSchema>) => {
       try {
          await axios.patch(`/api/courses/${courseId}`, values);
-         toast.success("Course updated successfully...");
+         toast.success("Course updated");
          toggleEdit();
          router.refresh();
       } catch {
-         toast.error("Something went wrong..!");
+         toast.error("Something went wrong");
       }
    }
+
    return (
       <div className="mt-6 border bg-slate-100 rounded-md p-4">
-         <div className="fornt-medium flex items-center justify-between">
-            Course Image
+         <div className="font-medium flex items-center justify-between">
+            Course image
             <Button onClick={toggleEdit} variant="ghost">
                {isEditing && (
-                  <>
-                     Cancel
-                     <X size={"sm"} />
-                  </>
+                  <>Cancel</>
                )}
                {!isEditing && !initialData.imageUrl && (
                   <>
@@ -75,7 +73,7 @@ export const ImageForm = ({
             ) : (
                <div className="relative aspect-video mt-2">
                   <Image
-                     alt="upload"
+                     alt="Upload"
                      fill
                      className="object-cover rounded-md"
                      src={initialData.imageUrl}
@@ -89,12 +87,12 @@ export const ImageForm = ({
                   endpoint="courseImage"
                   onChange={(url) => {
                      if (url) {
-                        onSumbit({ imageUrl: url });
+                        onSubmit({ imageUrl: url });
                      }
                   }}
                />
                <div className="text-xs text-muted-foreground mt-4">
-                  16:9 aspect ratio is recommanded
+                  16:9 aspect ratio recommended
                </div>
             </div>
          )}

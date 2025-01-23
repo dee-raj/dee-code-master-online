@@ -8,28 +8,36 @@ import { db } from "@/lib/db";
 import { TitleForm } from "./_components/title-form";
 import { DescriptionForm } from "./_components/description-form";
 import { ImageForm } from "./_components/image-form";
+import { CategoryForm } from "./_components/category-form";
 
 
 const CourseIdPage = async ({
    params
 }: {
-   params: {courseId: string}
+   params: { courseId: string }
 }) => {
-   const {userId} = auth();
-   if ( !userId ){
+   const { userId } = auth();
+   if (!userId) {
       return redirect("/");
    }
 
    const course = await db.course.findUnique({
-      where:{
+      where: {
          id: params.courseId
       }
    });
 
-   if(!course){
+   const categories = await db.category.findMany({
+      orderBy: {
+         name: "asc"
+      }
+   });
+   // console.log("Categories: ",categories);
+
+   if (!course) {
       return redirect("/");
    }
-   const requiredFields =[
+   const requiredFields = [
       course.title,
       course.description,
       course.imageUrl,
@@ -42,7 +50,7 @@ const CourseIdPage = async ({
 
    const completionText = `(${completedFields}/${totalFields})`;
 
-   return ( 
+   return (
       <div className="p-6">
          <div className="flex items-center justify-between">
             <div className="flex flex-col gap-y-2">
@@ -63,21 +71,29 @@ const CourseIdPage = async ({
                   </h2>
                </div>
                <TitleForm
-                  initialData = {course}
-                  courseId = {course.id}
+                  initialData={course}
+                  courseId={course.id}
                />
                <DescriptionForm
-                  initialData = {course}
-                  courseId = {course.id}
+                  initialData={course}
+                  courseId={course.id}
                />
                <ImageForm
-                  initialData = {course}
-                  courseId = {course.id}
+                  initialData={course}
+                  courseId={course.id}
+               />
+               <CategoryForm
+                  initialData={course}
+                  courseId={course.id}
+                  options={categories.map((category) => ({
+                     label: category.name,
+                     value: category.id,
+                  }))}
                />
             </div>
          </div>
       </div>
-    );
+   );
 }
 
 export default CourseIdPage;
