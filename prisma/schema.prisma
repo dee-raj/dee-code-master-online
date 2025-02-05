@@ -21,7 +21,7 @@ model Course {
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])
 
-  chapters     Chapter[]
+  chapters    Chapter[]
   attachments Attachment[]
   Purchase    Purchase[]
 
@@ -108,9 +108,9 @@ model Purchase {
   @@index([courseId])
 }
 
-model StripeCustomer{
-  id String @id @default(uuid())
-  userId String @unique
+model StripeCustomer {
+  id               String @id @default(uuid())
+  userId           String @unique
   stripeCustomerId String @unique
 
   createdAt DateTime @default(now())
