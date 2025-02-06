@@ -1,4 +1,4 @@
-# Build an LMS Platform: Next.js 13,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
+# Build an LMS Platform: Next.js 13,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2025
 
 ![Copy of Copy of Copy of Copy of Fullstack Twitter Clone (9)](https://github.com/dee-raj/dee-code-master-online/assets/23248726/fa077fca-bb74-419a-84de-54ac103bb026)
 

@@ -113,7 +113,7 @@ export const DescriptionForm = ({
                         disabled={!isValid || isSubmitting}
                         type="submit"
                      >
-                        Save
+                        {isSubmitting ? "Saving" : "Save"}
                      </Button>
                   </div>
                </form>

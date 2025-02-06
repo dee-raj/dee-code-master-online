@@ -117,12 +117,12 @@ export const ChapterDescriptionForm = ({
                         disabled={!isValid || isSubmitting}
                         type="submit"
                      >
-                        Save
+                        {isSubmitting ? "Saving" : "Save"}
                      </Button>
                   </div>
                </form>
             </Form>
          )}
       </div>
-   )
-}
+   );
+};

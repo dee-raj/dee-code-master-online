@@ -99,5 +99,5 @@ export const ChapterVideoForm = ({
             </div>
          )}
       </div>
-   )
-}
+   );
+};

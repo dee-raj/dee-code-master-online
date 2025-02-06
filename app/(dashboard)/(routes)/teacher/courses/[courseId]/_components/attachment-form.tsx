@@ -32,7 +32,7 @@ export const AttachmentsForm = ({
 
    const onSubmit = async (values: z.infer<typeof formSchema>) => {
       try {
-         await axios.patch(`/api/courses/${courseId}/attachments`, values);
+         await axios.post(`/api/courses/${courseId}/attachments`, values);
          toast.success("Course updated");
          toggleEdit();
          router.refresh();
@@ -44,7 +44,7 @@ export const AttachmentsForm = ({
    const onDelete = async (id: string) => {
       try {
          setDeletingId(id);
-         await axios.delete(`api/courses/${courseId}/attachments/${id}`);
+         await axios.delete(`/api/courses/${courseId}/attachments/${id}`);
          toast.success("Attachment deleted");
          router.refresh();
       } catch (error) {

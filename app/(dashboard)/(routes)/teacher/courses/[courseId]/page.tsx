@@ -41,6 +41,7 @@ const CourseIdPage = async ({
                position: "asc"
             },
          },
+         category: true
       }
    });
 
@@ -49,7 +50,14 @@ const CourseIdPage = async ({
          name: "asc"
       }
    });
-   // console.log("Categories: ",categories);
+
+   // console.log("Passing to CategoryForm:", {
+   //    initialData: course,
+   //    options: categories.map((category) => ({
+   //       label: category.name,
+   //       value: category.id,
+   //    })),
+   // });
 
    if (!course) {
       return redirect("/");
