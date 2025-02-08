@@ -2,40 +2,40 @@
 import { BarChart, Compass, Layout, List } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 import { usePathname } from "next/navigation";
-const guestRoutes =[
+const guestRoutes = [
    {
       icon: Layout,
       label: "Dashboard",
-      href:"/"
+      href: "/"
    },
    {
       icon: Compass,
       label: "Browse",
-      href:"/search"
+      href: "/search"
    },
 ]
 
-const tracherRoutes =[
+const tracherRoutes = [
    {
       icon: List,
       label: "Courses",
-      href:"/teacher/courses"
+      href: "/teacher/courses"
    },
    {
       icon: BarChart,
       label: "Analytics",
-      href:"/teacher/analytics"
+      href: "/teacher/analytics"
    },
 ]
 
-export const SidebarRoutes = () =>{
+export const SidebarRoutes = () => {
    const pathname = usePathname();
    const isTeacherPage = pathname?.includes("/teacher");
 
    const routes = isTeacherPage ? tracherRoutes : guestRoutes;
    return (
       <div className="flex flex-col w-full">
-         {routes.map((route)=>(
+         {routes.map((route) => (
             <SidebarItem
                key={route.href}
                icon={route.icon}

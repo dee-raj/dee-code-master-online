@@ -14,14 +14,14 @@ export async function POST(
       }
 
       const course = await db.course.create({
-         data:{
+         data: {
             userId,
             title,
          }
       });
 
       return NextResponse.json(course);
-   }  catch (error) {
+   } catch (error) {
       console.error("[COURSES]", error);
       return new NextResponse("Internal Error", { status: 500 });
    }

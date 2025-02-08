@@ -11,18 +11,18 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+   Form,
+   FormControl,
+   FormDescription,
+   FormField,
+   FormItem,
+   FormLabel,
+   FormMessage,
 } from "@/components/ui/form";
 
 const formSchema = z.object({
    title: z.string().min(1, {
-     message: "This is reuired",
+      message: "This is reuired",
    }),
 });
 
@@ -30,14 +30,14 @@ const CreatePage = () => {
    const router = useRouter();
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
-      defaultValues:{
+      defaultValues: {
          title: ""
       },
    });
 
-   const {isSubmitting, isValid } = form.formState;
-   const onSubmit = async (values: z.infer<typeof formSchema>) =>{
-      try{
+   const { isSubmitting, isValid } = form.formState;
+   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+      try {
          const resonse = await axios.post("/api/courses", values);
          router.push(`/teacher/courses/${resonse.data.id}`);
          toast.success("Course created successfully...!");
@@ -63,13 +63,13 @@ const CreatePage = () => {
                   <FormField
                      control={form.control}
                      name="title"
-                     render={({ field }) =>(
+                     render={({ field }) => (
                         <FormItem>
                            <FormLabel>
                               Course title
                            </FormLabel>
                            <FormControl>
-                              <Input 
+                              <Input
                                  disabled={isSubmitting}
                                  placeholder="e.g. 'Advance Web Development'"
                                  {...field}
@@ -88,7 +88,7 @@ const CreatePage = () => {
                      <Link href="/">
                         <Button
                            type="button"
-                           variant= "ghost"
+                           variant="ghost"
                         >
                            Cancel
                         </Button>

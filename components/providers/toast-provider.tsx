@@ -2,6 +2,6 @@
 
 import { Toaster } from "react-hot-toast";
 
-export const ToastProvider = () =>{
+export const ToastProvider = () => {
    return <Toaster />
 }
