@@ -29,7 +29,7 @@ interface CategoryProps {
     items: Category[];
 };
 
-const Categories = ({
+export const Categories = ({
     items
 }: CategoryProps) => {
     return (
@@ -45,5 +45,3 @@ const Categories = ({
         </div>
     )
 }
-
-export default Categories;

@@ -28,7 +28,6 @@ model Course {
   updatedAt DateTime @updatedAt
 
   @@index([categoryId])
-  @@fulltext([title])
 }
 
 model Category {
