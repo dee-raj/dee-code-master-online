@@ -1,15 +1,16 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { columns } from "./_components/columns";
-import { DataTable } from "./_components/data-table";
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { Plus } from "lucide-react";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+
+import { columns } from "./_components/columns";
+import { DataTable } from "./_components/data-table";
 
 
 const TeacherCoursePage = async () => {
-   const { userId } = auth();
+   const { userId } = await auth();
    if (!userId) {
       return redirect("/");
    }
