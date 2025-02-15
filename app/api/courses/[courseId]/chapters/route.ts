@@ -7,7 +7,8 @@ export async function POST(
     { params }: { params: { courseId: string } }
 ) {
     try {
-        const { userId } = auth();
+        const { userId } = await auth();
+        const { courseId } = await params;
         const { title } = await req.json();
 
         if (!userId) {
@@ -15,7 +16,7 @@ export async function POST(
         }
         const courseOwner = await db.course.findUnique({
             where: {
-                id: params.courseId,
+                id: courseId,
                 userId: userId
             }
         });
@@ -25,7 +26,7 @@ export async function POST(
 
         const lastChapter = await db.chapter.findFirst({
             where: {
-                courseId: params.courseId,
+                courseId: courseId,
             },
             orderBy: {
                 position: 'desc'
@@ -36,7 +37,7 @@ export async function POST(
         const chapter = await db.chapter.create({
             data: {
                 title,
-                courseId: params.courseId,
+                courseId: courseId,
                 position: newPosition,
             }
         });

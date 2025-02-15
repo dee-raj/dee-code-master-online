@@ -7,19 +7,20 @@ import { getProgress } from '@/actions/get-progress';
 import { CourseSideBar } from './_components/course-sidebar';
 import { CourseNavbar } from './_components/course-navbar';
 
-const CourseLayout = async ({
-    children,
-    params
-}: {
+interface CourseLayoutProps {
     children: ReactNode;
     params: { courseId: string; }
-}) => {
-    const { userId } = auth();
+};
+
+const CourseLayout = async ({ children, params }: CourseLayoutProps) => {
+
+    const { courseId } = await params;
+    const { userId } =await auth();
     if (!userId) { return redirect('/') }
 
     const publishedCourses = await db.course.findUnique({
         where: {
-            id: params.courseId,
+            id: courseId,
             userId: userId,
         },
         include: {

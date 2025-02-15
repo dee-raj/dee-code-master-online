@@ -1,11 +1,7 @@
-# Build an LMS Platform: Next.js 13,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2025
+# Build an LMS Platform: Next.js 15,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2025
 
-![Copy of Copy of Copy of Copy of Fullstack Twitter Clone (9)](https://github.com/dee-raj/dee-code-master-online/assets/23248726/fa077fca-bb74-419a-84de-54ac103bb026)
+This is a repository for Build an LMS Platform: Next.js 15,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2025
 
-
-This is a repository for Build an LMS Platform: Next.js 13,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
-
-[VIDEO TUTORIAL](https://www.youtube.com/watch?v=Big_aFLmekI)
 
 Key Features:
 
@@ -70,11 +66,18 @@ NEXT_PUBLIC_TEACHER_ID=
 
 ### Setup Prisma
 
-Add MySQL Database (I used PlanetScale)
+Add MySQL Database
 
+Prisma commands
 ```shell
-npx prisma generate
-npx prisma db push
+    npx prisma generate
+
+    npx prisma migrate reset
+    npx prisma db push
+
+    node .\scripts\seed.mjs
+
+    npx prisma studio
 
 ```
 

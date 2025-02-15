@@ -6,6 +6,8 @@ import { VideoPlayer } from "./_components/video-player";
 import { CourseEnrollButton } from "./_components/course-enroll-button";
 import { Separator } from "@/components/ui/seperator";
 import { Preview } from "@/components/preview";
+import { File } from "lucide-react";
+import { CourseProgressButton } from "./_components/course-progress-button";
 
 interface chapterIdPageProps {
     params: {
@@ -14,8 +16,9 @@ interface chapterIdPageProps {
     };
 };
 const ChapterIdPage = async ({ params }: chapterIdPageProps) => {
+    const { chapterId, courseId } = await params;
 
-    const { userId } = auth();
+    const { userId } = await auth();
     if (!userId) { return redirect("/"); }
 
     const {
@@ -28,8 +31,8 @@ const ChapterIdPage = async ({ params }: chapterIdPageProps) => {
         purchase
     } = await GetChapter({
         userId,
-        chapterId: params.chapterId,
-        courseId: params.courseId
+        chapterId: chapterId,
+        courseId: courseId
     });
 
     if (!course || !chapter) { return redirect("/"); }
@@ -54,9 +57,9 @@ const ChapterIdPage = async ({ params }: chapterIdPageProps) => {
             <div className="flex flex-col max-w-4xl mx-auto pb-20">
                 <div className="p-4">
                     <VideoPlayer
-                        chapterId={params.chapterId}
+                        chapterId={chapterId}
                         title={chapter.title}
-                        courseId={params.courseId}
+                        courseId={courseId}
                         nextChapterId={nextChapter?.id}
                         playbackId={muxData?.playbackId!}
                         isLocked={isLocked}
@@ -68,10 +71,15 @@ const ChapterIdPage = async ({ params }: chapterIdPageProps) => {
                         {chapter.title}
                     </h2>
                     {purchase ? (
-                        <></> //TODO: add CourseProgressButton
+                        <CourseProgressButton
+                            courseId={courseId}
+                            chapterId={chapterId}
+                            nextChapterId={nextChapter?.id}
+                            isCompleted={!!userProgress?.isCompleted}
+                        />
                     ) : (
                         <CourseEnrollButton
-                            courseId={params.courseId}
+                            courseId={courseId}
                             price={course.price!}
                         />
                     )}
@@ -90,6 +98,7 @@ const ChapterIdPage = async ({ params }: chapterIdPageProps) => {
                                     target="_blank"
                                     className="flex items-center p-3 w-full bg-sky-200 border text-sky-700 rounded-md hover:underline"
                                 >
+                                    <File size={24} className="w-4 h-4 mr-1 md:mr-4 " />
                                     <p className="line-clamp-1">
                                         {attachment.name}
                                     </p>

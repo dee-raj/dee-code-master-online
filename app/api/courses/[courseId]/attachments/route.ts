@@ -7,13 +7,14 @@ export async function POST(
     { params }: { params: { courseId: string } }
 ) {
     try {
-        const { userId } = auth();
+        const { userId } = await auth();
+        const { courseId } = await params;
         const { url } = await req.json();
 
         if (!userId) {
             return new NextResponse("Unauthorized user...", { status: 401 });
         }
-        if (!params.courseId) {
+        if (!courseId) {
             return NextResponse.json(
                 { error: "Missing courseId" },
                 { status: 400 }
@@ -21,7 +22,7 @@ export async function POST(
         }
         const courseOwner = await db.course.findUnique({
             where: {
-                id: params.courseId,
+                id: courseId,
                 userId: userId,
             }
         });
@@ -32,12 +33,11 @@ export async function POST(
             );
         }
 
-        // Create the attachment entry
         const attachment = await db.attachment.create({
             data: {
                 url: url,
-                name: url.split("/").pop() || "file", // fallback name if split fails
-                courseId: params.courseId,
+                name: url.split("/").pop() || "file",
+                courseId: courseId,
             },
         });
         return NextResponse.json(attachment);

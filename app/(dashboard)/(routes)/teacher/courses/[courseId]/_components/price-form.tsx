@@ -43,7 +43,7 @@ export const PriceForm = ({
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-         price: initialData?.price || undefined
+         price: initialData?.price ?? 0
       }
    });
 
@@ -104,7 +104,7 @@ export const PriceForm = ({
                                  type="number"
                                  step="0.01"
                                  disabled={isSubmitting}
-                                 placeholder="set a price for your course"
+                                 placeholder="Set a price for your course"
                                  {...field}
                               />
                            </FormControl>
@@ -124,5 +124,5 @@ export const PriceForm = ({
             </Form>
          )}
       </div>
-   )
+   );
 }

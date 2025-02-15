@@ -53,7 +53,7 @@ export const columns: ColumnDef<Course>[] = [
 
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
-                currency: "INR",
+                currency: "USD",
             }).format(amount);
             return <div className="text-left font-medium">{formatted}</div>
 

@@ -17,6 +17,7 @@ import { Actions } from "./_components/actions";
 
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
+   const { courseId } = await params;
    const { userId } = auth();
 
    if (!userId) {
@@ -25,7 +26,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
    const course = await db.course.findUnique({
       where: {
-         id: params.courseId,
+         id: courseId,
          userId
       },
       include: {
@@ -87,7 +88,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                {/* Add Actions  */}
                <Actions
                   disabled={!isCompleted}
-                  courseId={params.courseId}
+                  courseId={courseId}
                   isPublished={course.isPublished}
                />
             </div>
