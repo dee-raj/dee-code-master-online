@@ -1,47 +1,48 @@
-# Build an LMS Platform: Next.js 15,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2025
+As of February 16, 2025, the repository for "Build an LMS Platform: Next.js 15, React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2025" is up-to-date with the latest technologies and best practices. Below are the key features, prerequisites, setup instructions, and available commands for the project:
 
-This is a repository for Build an LMS Platform: Next.js 15,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2025
+## Key Features
 
+- **Browse & Filter Courses**: Easily navigate and find courses of interest.
+- **Purchase Courses using Stripe**: Secure payment processing for course enrollment.
+- **Mark Chapters as Completed or Uncompleted**: Track learning progress effectively.
+- **Progress Calculation of each Course**: Monitor overall course completion status.
+- **Student Dashboard**: Personalized interface for learners to manage their courses.
+- **Teacher Mode**: Instructors can create and manage their courses and content.
+- **Create New Courses and Chapters**: User-friendly tools for content creation.
+- **Easily Reorder Chapter Positions with Drag and Drop**: Intuitive interface for organizing course content.
+- **Upload Thumbnails, Attachments, and Videos using UploadThing**: Simplified media management.
+- **Video Processing using Mux**: Efficient handling and streaming of video content.
+- **HLS Video Player using Mux**: High-quality video playback experience.
+- **Rich Text Editor for Chapter Descriptions**: Enhanced content formatting options.
+- **Authentication using Clerk**: Robust user authentication and management.
+- **ORM using Prisma**: Seamless database interactions and migrations.
+- **MySQL Database using PlanetScale**: Scalable and reliable database solution.
 
-Key Features:
+## Prerequisites
 
-- Browse & Filter Courses
-- Purchase Courses using Stripe
-- Mark Chapters as Completed or Uncompleted
-- Progress Calculation of each Course
-- Student Dashboard
-- Teacher mode
-- Create new Courses
-- Create new Chapters
-- Easily reorder chapter position with drag n’ drop
-- Upload thumbnails, attachments and videos using UploadThing
-- Video processing using Mux
-- HLS Video player using Mux
-- Rich text editor for chapter description
-- Authentication using Clerk
-- ORM using Prisma
-- MySQL database using Planetscale
+- **Node.js Version 18.x.x**: Ensure you have Node.js version 18 installed.
 
-### Prerequisites
+## Cloning the Repository
 
-**Node version 18.x.x**
+To clone the repository, execute the following command:
 
-### Cloning the repository
-
-```shell
+```bash
 git clone https://github.com/dee-raj/dee-code-master-online.git
 ```
 
-### Install packages
+## Installing Packages
 
-```shell
-npm i
+Navigate to the project directory and install the necessary packages:
+
+```bash
+npm install
 ```
 
-### Setup .env file
+## Setting Up the Environment Variables
 
+Create a `.env` file in the root directory and add the following environment variables:
 
-```js
+```env
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=
@@ -64,33 +65,41 @@ STRIPE_WEBHOOK_SECRET=
 NEXT_PUBLIC_TEACHER_ID=
 ```
 
-### Setup Prisma
+Replace the placeholder values with your actual configuration details.
+---
 
-Add MySQL Database
+## Setting Up Prisma
 
-Prisma commands
-```shell
-    npx prisma generate
+Configure your MySQL database and initialize Prisma with the following commands:
 
-    npx prisma migrate reset
-    npx prisma db push
-
-    node .\scripts\seed.mjs
-
-    npx prisma studio
-
+```bash
+npx prisma generate
+npx prisma migrate reset
+npx prisma db push
+node ./scripts/seed.mjs
+npx prisma studio
 ```
 
-### Start the app
+These commands will set up your database schema, apply migrations, seed initial data, and open Prisma Studio for database exploration.
 
-```shell
+## Starting the Application
+
+To start the development server, run:
+
+```bash
 npm run dev
 ```
 
-## Available commands
+This will launch the application on `http://localhost:3000`.
 
-Running commands with npm `npm run [command]`
+## Available Commands
 
-| command         | description                              |
-| :-------------- | :--------------------------------------- |
-| `dev`           | Starts a development instance of the app |
+You can execute the following commands using `npm run [command]`:
+
+| Command | Description |
+|---------|-------------|
+| `dev`   | Starts a development instance of the app |
+
+For more detailed information and updates, refer to the official Next.js 15 release notes.
+
+By following these instructions, you should have the Learning Management System (LMS) platform up and running with the latest technologies and features. 
