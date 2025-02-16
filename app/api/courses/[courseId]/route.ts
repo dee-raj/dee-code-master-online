@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 import Mux from "@mux/mux-node";
+import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 const { video } = new Mux({
@@ -66,7 +66,7 @@ export async function PATCH(
    { params }: { params: { courseId: string } }
 ) {
    try {
-      const { userId } =await auth();
+      const { userId } = await auth();
       const { courseId } = await params;
       const values = await req.json();
 

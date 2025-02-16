@@ -1,5 +1,7 @@
 As of February 16, 2025, the repository for "Build an LMS Platform: Next.js 15, React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2025" is up-to-date with the latest technologies and best practices. Below are the key features, prerequisites, setup instructions, and available commands for the project:
 
+<img src="images/master-logo.png" alt="browse course" width="500"/>
+
 ## Key Features
 
 - **Browse & Filter Courses**: Easily navigate and find courses of interest.
@@ -17,6 +19,8 @@ As of February 16, 2025, the repository for "Build an LMS Platform: Next.js 15, 
 - **Authentication using Clerk**: Robust user authentication and management.
 - **ORM using Prisma**: Seamless database interactions and migrations.
 - **MySQL Database using PlanetScale**: Scalable and reliable database solution.
+
+<img src="images/search.PNG" alt="browse course" width="900"/>
 
 ## Prerequisites
 
@@ -91,6 +95,33 @@ npm run dev
 ```
 
 This will launch the application on `http://localhost:3000`.
+
+
+## Setting Up Stripe CLI
+
+Integrating Stripe CLI into your development workflow allows for efficient testing and management of Stripe functionalities. Here's how to set it up:
+
+1. **Install Stripe CLI**:
+   - refer to the [Stripe CLI documentation](https://stripe.com/docs/stripe-cli)
+
+2. **Authenticate with Your Stripe Account**:
+   - After installation, authenticate the CLI with your Stripe account:
+
+     ```bash
+     stripe login
+     ```
+
+   - This command will open a browser window prompting you to log in to your Stripe account and grant access to the CLI.
+
+3. **Forward Webhooks to Your Local Server**:
+   - To test webhook integrations locally, use the following command:
+
+     ```bash
+     stripe listen --forward-to localhost:3000/api/webhook
+     ```
+
+   - This sets up a listener that forwards Stripe events to your local webhook endpoint.
+
 
 ## Available Commands
 
