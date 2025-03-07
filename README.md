@@ -19,6 +19,7 @@ As of February 16, 2025, the repository for "Build an LMS Platform: Next.js 15, 
 - **Authentication using Clerk**: Robust user authentication and management.
 - **ORM using Prisma**: Seamless database interactions and migrations.
 - **MySQL Database using PlanetScale**: Scalable and reliable database solution.
+- **MongoDB Database for Production**: Cloud based database with free demo uses.
 
 <img src="images/search.PNG" alt="browse course" width="900"/>
 
@@ -78,8 +79,8 @@ Configure your MySQL database and initialize Prisma with the following commands:
 
 ```bash
 npx prisma generate
-npx prisma migrate reset
 npx prisma db push
+npx prisma migrate reset
 node ./scripts/seed.mjs
 npx prisma studio
 ```

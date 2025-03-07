@@ -1,7 +1,6 @@
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider     = "mongodb"
+  url = env("DATABASE_URL")
 }
 
 generator client {
@@ -9,11 +8,11 @@ generator client {
 }
 
 model Course {
-  id          String  @id @default(uuid())
+  id          String  @id @default(uuid()) @map("_id")
   userId      String
-  title       String  @db.Text
-  description String? @db.Text
-  imageUrl    String? @db.Text
+  title       String
+  description String?
+  imageUrl    String?
   price       Float?
   isPublished Boolean @default(false)
 
@@ -31,15 +30,15 @@ model Course {
 }
 
 model Category {
-  id      String   @id @default(uuid())
+  id      String   @id @default(uuid()) @map("_id")
   name    String   @unique
   courses Course[]
 }
 
 model Attachment {
-  id   String @id @default(uuid())
+  id   String @id @default(uuid()) @map("_id")
   name String
-  url  String @db.Text
+  url  String
 
   courseId String
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
@@ -51,10 +50,10 @@ model Attachment {
 }
 
 model Chapter {
-  id          String  @id @default(uuid())
+  id          String  @id @default(uuid()) @map("_id")
   title       String
-  description String? @db.Text
-  videoUrl    String? @db.Text
+  description String?
+  videoUrl    String?
   position    Int
   isPublished Boolean @default(false)
   isFree      Boolean @default(false)
@@ -71,7 +70,7 @@ model Chapter {
 }
 
 model MuxData {
-  id         String  @id @default(uuid())
+  id         String  @id @default(uuid()) @map("_id")
   assetId    String
   playbackId String?
 
@@ -80,7 +79,7 @@ model MuxData {
 }
 
 model UserProgress {
-  id        String  @id @default(uuid())
+  id        String  @id @default(uuid()) @map("_id")
   userId    String
   chapterId String
   chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
@@ -94,7 +93,7 @@ model UserProgress {
 }
 
 model Purchase {
-  id     String @id @default(uuid())
+  id     String @id @default(uuid()) @map("_id")
   userId String
 
   courseId String
@@ -108,7 +107,7 @@ model Purchase {
 }
 
 model StripeCustomer {
-  id               String @id @default(uuid())
+  id               String @id @default(uuid()) @map("_id")
   userId           String @unique
   stripeCustomerId String @unique
 
