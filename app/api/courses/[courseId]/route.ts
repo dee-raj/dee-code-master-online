@@ -4,14 +4,18 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 const { video } = new Mux({
-   tokenId: process.env['MUX_TOKEN_ID'],
-   tokenSecret: process.env['MUX_TOKEN_SECRET'],
+   tokenId: process.env["MUX_TOKEN_ID"],
+   tokenSecret: process.env["MUX_TOKEN_SECRET"],
 });
 
+interface RouteParams {
+   courseId: string;
+}
 export async function DELETE(
    req: Request,
-   { params }: { params: { courseId: string } }
+   { params }: { params: Promise<RouteParams> }
 ) {
+   const { courseId } = await params;
    try {
       const { userId } = auth();
       if (!userId) {
@@ -20,7 +24,7 @@ export async function DELETE(
 
       const courseWithMux = await db.course.findUnique({
          where: {
-            id: params.courseId,
+            id: courseId,
             userId: userId,
          },
          include: {
@@ -50,11 +54,10 @@ export async function DELETE(
 
       const deletedCourse = await db.course.delete({
          where: {
-            id: params.courseId,
+            id: courseId,
          },
       });
       return NextResponse.json(deletedCourse);
-
    } catch (error) {
       console.error("[Course-Id-Delete]", error);
       return new NextResponse("Internal Error..!", { status: 500 });
@@ -63,7 +66,7 @@ export async function DELETE(
 
 export async function PATCH(
    req: Request,
-   { params }: { params: { courseId: string } }
+   { params }: { params: Promise<RouteParams> }
 ) {
    try {
       const { userId } = await auth();

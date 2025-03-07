@@ -10,7 +10,7 @@ const client = new Mux({
 
 export async function DELETE(
     req: Request,
-    { params }: { params: { chapterId: string; courseId: string } }
+    { params }: { params: Promise<{ chapterId: string; courseId: string }> }
 ) {
     try {
         const { userId } = await auth();
@@ -89,7 +89,7 @@ export async function DELETE(
 
 export async function PATCH(
     req: Request,
-    { params }: { params: { chapterId: string; courseId: string } }
+    { params }: { params: Promise<{ chapterId: string; courseId: string }> }
 ) {
     try {
         const { userId } = await auth();

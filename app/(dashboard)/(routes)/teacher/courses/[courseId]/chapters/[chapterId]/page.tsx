@@ -12,7 +12,7 @@ import { Banner } from "@/components/banner";
 import { ChapterActions } from "./_components/chapter-actions";
 
 const ChapterIdPage = async ({ params }: {
-    params: { courseId: string, chapterId: string }
+    params: Promise<{ courseId: string, chapterId: string }>
 }) => {
     const { chapterId, courseId } = await params;
     const { userId } = auth();

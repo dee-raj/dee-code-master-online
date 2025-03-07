@@ -2,14 +2,16 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
+interface RouteParams {
+    params: Promise<{
+        courseId: string;
+        chapterId: string;
+    }>
+}
+
 export async function PUT(
     req: Request,
-    { params }: {
-        params: {
-            courseId: string;
-            chapterId: string;
-        }
-    }
+    { params }: RouteParams,
 ) {
     try {
         const { chapterId, courseId } = await params;

@@ -9,13 +9,13 @@ import { CourseNavbar } from './_components/course-navbar';
 
 interface CourseLayoutProps {
     children: ReactNode;
-    params: { courseId: string; }
+    params: Promise<{ courseId: string; }>
 };
 
 const CourseLayout = async ({ children, params }: CourseLayoutProps) => {
 
     const { courseId } = await params;
-    const { userId } =await auth();
+    const { userId } = await auth();
     if (!userId) { return redirect('/') }
 
     const publishedCourses = await db.course.findUnique({

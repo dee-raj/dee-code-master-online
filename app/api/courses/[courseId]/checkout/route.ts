@@ -6,7 +6,7 @@ import { currentUser } from "@clerk/nextjs";
 
 export async function POST(
     req: Request,
-    { params }: { params: { courseId: string; } }
+    { params }: { params: Promise<{ courseId: string; }> }
 ) {
     try {
         const { courseId } = await params;

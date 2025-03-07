@@ -13,10 +13,11 @@ interface SearchParams {
 }
 
 interface SearchParamsProps {
-   searchParams: Promise<SearchParams> | SearchParams;
+   searchParams: Promise<Promise<SearchParams> | SearchParams>;
 }
 
-const SearchPage = async ({ searchParams }: SearchParamsProps) => {
+const SearchPage = async (props: SearchParamsProps) => {
+   const searchParams = await props.searchParams;
    const { categoryId, title } = await Promise.resolve(searchParams);
 
    const user = await currentUser();
