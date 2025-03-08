@@ -21,7 +21,7 @@ const CourseLayout = async ({ children, params }: CourseLayoutProps) => {
     const publishedCourses = await db.course.findUnique({
         where: {
             id: courseId,
-            userId: userId,
+            isPublished: true,
         },
         include: {
             chapters: {
