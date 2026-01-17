@@ -15,7 +15,7 @@ type DashboardCourses = {
 
 export const getDashboard = async (userId: string): Promise<DashboardCourses> => {
     try {
-        const purchaseCourses = await db.purchase.findMany({
+        const purchaseCourses = await db?.purchase?.findMany({
             where: {
                 userId,
             },

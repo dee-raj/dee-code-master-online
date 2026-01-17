@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { BookText } from "lucide-react";
 import { redirect } from "next/navigation";
 import { CourseSideBarItem } from "./course-sidebar-item";
@@ -15,7 +15,7 @@ interface CourseSideBarProps {
     progressCount: number;
 }
 export const CourseSideBar = async ({ course, progressCount }: CourseSideBarProps) => {
-    const { userId } = auth();
+    const { userId } = await auth();
     if (!userId) { return redirect('/') }
 
     const purchase = await db.purchase.findUnique({

@@ -1,6 +1,6 @@
 import { File, LayoutDashboard, ListChecks } from "lucide-react";
 import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 import { IconBadge } from "@/components/icon-badge";
 import { db } from "@/lib/db";
@@ -18,7 +18,7 @@ import { Actions } from "./_components/actions";
 
 const CourseIdPage = async ({ params }: { params: Promise<{ courseId: string }> }) => {
    const { courseId } = await params;
-   const { userId } = auth();
+   const { userId } = await auth();
 
    if (!userId) {
       return redirect("/");
@@ -44,7 +44,7 @@ const CourseIdPage = async ({ params }: { params: Promise<{ courseId: string }> 
       }
    });
 
-   const categories = await db.category.findMany({
+   const categories = await db?.category?.findMany({
       orderBy: {
          name: "asc"
       }

@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
-import { currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 import { getCourses } from "@/actions/get-courses";
 import { Categories } from "./_components/categories";
@@ -13,12 +14,12 @@ interface SearchParams {
 }
 
 interface SearchParamsProps {
-   searchParams: Promise<Promise<SearchParams> | SearchParams>;
+   searchParams: Promise<SearchParams>;
 }
 
 const SearchPage = async (props: SearchParamsProps) => {
    const searchParams = await props.searchParams;
-   const { categoryId, title } = await Promise.resolve(searchParams);
+   const { categoryId, title } = searchParams;
 
    const user = await currentUser();
    if (!user) {
@@ -38,11 +39,15 @@ const SearchPage = async (props: SearchParamsProps) => {
    return (
       <>
          <div className="px-6 pt-6 md:hidden md:mb-0 block">
-            <SearchInput />
+            <Suspense fallback={<div>Loading...</div>}>
+               <SearchInput />
+            </Suspense>
          </div>
          <div className="p-6 space-y-4">
-            <Categories items={categories} />
-            <CoursesList items={courses} />
+            <Suspense fallback={<div>Loading...</div>}>
+               <Categories items={categories} />
+               <CoursesList items={courses} />
+            </Suspense>
          </div>
       </>
    );

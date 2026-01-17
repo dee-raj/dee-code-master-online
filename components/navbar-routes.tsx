@@ -1,5 +1,6 @@
 "use client";
 
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { LogOut } from "lucide-react";
 import { useAuth, UserButton } from "@clerk/nextjs";
@@ -21,7 +22,9 @@ export const NavbarRoutes = () => {
       <>
          {isSearchPage && (
             <div className="hidden md:block">
-               <SearchInput />
+               <Suspense fallback={<div>Loading...</div>}>
+                  <SearchInput />
+               </Suspense>
             </div>
          )}
          <div className="flex gap-x-2 ml-auto">

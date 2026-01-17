@@ -1,6 +1,6 @@
 import { IconBadge } from "@/components/icon-badge";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -15,7 +15,7 @@ const ChapterIdPage = async ({ params }: {
     params: Promise<{ courseId: string, chapterId: string }>
 }) => {
     const { chapterId, courseId } = await params;
-    const { userId } = auth();
+    const { userId } = await auth();
     if (!userId) {
         return redirect("/");
     }
